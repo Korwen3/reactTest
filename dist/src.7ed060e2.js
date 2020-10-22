@@ -31584,10 +31584,128 @@ var _instance = require("./instance");
 var Services = {
   getAllPosts: function getAllPosts() {
     return _instance.instance.get('/posts');
+  },
+  getPost: function getPost(id) {
+    return _instance.instance.get('/posts/' + id);
+  },
+  postPost: function postPost(content) {
+    return _instance.instance.post('/posts/' + content);
+  },
+  putPost: function putPost(id, content) {
+    return _instance.instance.put('/posts/' + id + '/' + content);
+  },
+  deletePost: function deletePost(id) {
+    return _instance.instance.delete('/posts/' + id);
+  },
+  getAllComments: function getAllComments() {
+    return _instance.instance.get('/posts');
+  },
+  getComment: function getComment(id) {
+    return _instance.instance.get('/posts/' + id);
+  },
+  postComment: function postComment(content) {
+    return _instance.instance.post('/posts/' + content);
+  },
+  putComment: function putComment(id, content) {
+    return _instance.instance.put('/posts/' + id + '/' + content);
+  },
+  deleteComment: function deleteComment(id) {
+    return _instance.instance.delete('/posts/' + id);
   }
 };
 exports.Services = Services;
-},{"./instance":"../src/http-services/instance.js"}],"../src/App.js":[function(require,module,exports) {
+},{"./instance":"../src/http-services/instance.js"}],"../src/pages/AddPost.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.AddPost = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _httpServices = require("../http-services");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var AddPost = /*#__PURE__*/function (_React$Component) {
+  _inherits(AddPost, _React$Component);
+
+  var _super = _createSuper(AddPost);
+
+  function AddPost(props) {
+    var _this;
+
+    _classCallCheck(this, AddPost);
+
+    _this = _super.call(this, props);
+
+    _defineProperty(_assertThisInitialized(_this), "addPost", function () {
+      _httpServices.Services.postPost(_this.state.newPost);
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "changeHandler", function (event) {
+      _this.setState({
+        newPost: event.target.value
+      });
+
+      console.log(event.target.value);
+    });
+
+    _this.state = {
+      newPost: ""
+    };
+    return _this;
+  }
+
+  _createClass(AddPost, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {}
+  }, {
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("form", {
+        onSubmit: this.addPost
+      }, /*#__PURE__*/_react.default.createElement("label", null, "Post :", /*#__PURE__*/_react.default.createElement("input", {
+        type: "text",
+        value: this.state.newPost,
+        onChange: this.changeHandler
+      })), /*#__PURE__*/_react.default.createElement("input", {
+        type: "submit",
+        value: "Poster"
+      })));
+    }
+  }]);
+
+  return AddPost;
+}(_react.default.Component);
+
+exports.AddPost = AddPost;
+},{"react":"../node_modules/react/index.js","../http-services":"../src/http-services/index.js"}],"../src/App.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -31598,6 +31716,8 @@ exports.App = void 0;
 var _react = _interopRequireDefault(require("react"));
 
 var _httpServices = require("./http-services");
+
+var _AddPost = require("./pages/AddPost");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -31657,7 +31777,7 @@ var App = /*#__PURE__*/function (_React$Component) {
             }
           }, comment.id, ", ", comment.content);
         }));
-      })));
+      })), /*#__PURE__*/_react.default.createElement(_AddPost.AddPost, null));
     }
   }, {
     key: "componentDidMount",
@@ -31669,7 +31789,7 @@ var App = /*#__PURE__*/function (_React$Component) {
           allPosts: results.data
         });
 
-        console.log(JSON.stringify(results));
+        console.log(JSON.stringify(results.data));
       });
     }
   }]);
@@ -31678,7 +31798,7 @@ var App = /*#__PURE__*/function (_React$Component) {
 }(_react.default.Component);
 
 exports.App = App;
-},{"react":"../node_modules/react/index.js","./http-services":"../src/http-services/index.js"}],"../src/index.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./http-services":"../src/http-services/index.js","./pages/AddPost":"../src/pages/AddPost.js"}],"../src/index.js":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));

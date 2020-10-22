@@ -1,5 +1,6 @@
 import React from 'react';
 import { Services } from './http-services';
+import { AddPost } from './pages/AddPost';
 
 export class App extends React.Component {
     constructor(props) {
@@ -10,7 +11,7 @@ export class App extends React.Component {
     }
 
     render() {
-        return <>
+        return < >
             <div>
                 {this.state.allPosts.map((post, index) => <div key={index} style={{color:'blue'}}>
                     {post.id}, {post.content}
@@ -19,6 +20,8 @@ export class App extends React.Component {
                         {comment.id}, {comment.content}</div>)}
                 </div>)}
             </div>
+
+            <AddPost />
         </>
     }
 
@@ -27,7 +30,7 @@ export class App extends React.Component {
             this.setState({
                 allPosts: results.data
             });
-            console.log(JSON.stringify(results));
+            console.log(JSON.stringify(results.data));
         });
     }
 
