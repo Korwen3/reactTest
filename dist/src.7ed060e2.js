@@ -31643,8 +31643,20 @@ var App = /*#__PURE__*/function (_React$Component) {
   _createClass(App, [{
     key: "render",
     value: function render() {
-      return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("ul", null, this.state.allPosts.map(function (post) {
-        return /*#__PURE__*/_react.default.createElement("li", null, post.id, ", ", post.content, ", ", post.comment);
+      return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", null, this.state.allPosts.map(function (post, index) {
+        return /*#__PURE__*/_react.default.createElement("div", {
+          key: index,
+          style: {
+            color: 'blue'
+          }
+        }, post.id, ", ", post.content, post.comments.map(function (comment, index) {
+          return /*#__PURE__*/_react.default.createElement("div", {
+            key: index,
+            style: {
+              color: 'lightblue'
+            }
+          }, comment.id, ", ", comment.content);
+        }));
       })));
     }
   }, {
@@ -31657,7 +31669,7 @@ var App = /*#__PURE__*/function (_React$Component) {
           allPosts: results.data
         });
 
-        console.log(_this2.allPosts);
+        console.log(JSON.stringify(results));
       });
     }
   }]);

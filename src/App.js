@@ -11,9 +11,14 @@ export class App extends React.Component {
 
     render() {
         return <>
-            <ul>
-                {this.state.allPosts.map((post) => <li>{post.id}, {post.content}, {post.comment}</li>)}
-            </ul>
+            <div>
+                {this.state.allPosts.map((post, index) => <div key={index} style={{color:'blue'}}>
+                    {post.id}, {post.content}
+
+                    {post.comments.map((comment, index) => <div key={index} style={{color:'lightblue'}}>
+                        {comment.id}, {comment.content}</div>)}
+                </div>)}
+            </div>
         </>
     }
 
@@ -22,7 +27,9 @@ export class App extends React.Component {
             this.setState({
                 allPosts: results.data
             });
-            console.log(this.allPosts);
+            console.log(JSON.stringify(results));
         });
     }
+
+
 }
